@@ -1,9 +1,9 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Home from './pages/Home.jsx'
+import Home from './pages/Home'
 import CreateItem from './pages/CreateItem'
-import EditItem from './pages/EditItem.jsx'
+import EditItem from './pages/EditItem'
 import ViewItem from './pages/ViewItem'
 
 

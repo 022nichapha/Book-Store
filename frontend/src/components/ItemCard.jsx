@@ -3,20 +3,45 @@ import { Link } from 'react-router-dom'
 
 export default function ItemCard({ item, onDelete }) {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+    <div className="border rounded-lg p-4 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+      {/* ✅ ป้องกันรูปเสีย */}
       <img
-        src={item.coverImage || 'https://via.placeholder.com/200x300?text=No+Image'}
+        src={item.coverImage || 'https://via.placeholder.com/120x160?text=No+Image'}
         alt={item.title || 'No title'}
-        className="w-full h-60 object-cover"
+        className="w-24 h-32 object-cover rounded"
       />
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-        <p className="text-sm text-gray-500">{item.author} • {item.publisher} • {item.publishYear}</p>
-        <p className="mt-2 text-gray-600 text-sm line-clamp-3">{item.description || 'ไม่มีคำอธิบาย'}</p>
-        <div className="mt-3 flex gap-2">
-          <Link to={`/view/${item.itemId}`} className="flex-1 text-center py-1 rounded border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition">View</Link>
-          <Link to={`/edit/${item.itemId}`} className="flex-1 text-center py-1 rounded border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition">Edit</Link>
-          <button onClick={() => onDelete(item.itemId)} className="flex-1 text-center py-1 rounded border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition">Delete</button>
+
+      <div className="flex-1">
+        {/* ✅ ป้องกัน undefined */}
+        <h3 className="text-lg font-semibold">{item.title || 'ไม่ระบุชื่อเรื่อง'}</h3>
+        <p className="text-sm text-gray-600">
+          {item.author || 'ไม่ระบุผู้แต่ง'} • {item.publisher || 'ไม่ระบุสำนักพิมพ์'} • {item.publishYear || '-'}
+        </p>
+
+        {/* ✅ จำกัดความยาวคำอธิบาย */}
+        <p className="mt-2 text-sm text-gray-700 line-clamp-3">
+          {item.description || 'ไม่มีคำอธิบาย'}
+        </p>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link
+            to={`/view/${item.itemId}`}
+            className="px-3 py-1 border rounded text-sm hover:bg-blue-100 transition"
+          >
+            View
+          </Link>
+          <Link
+            to={`/edit/${item.itemId}`}
+            className="px-3 py-1 border rounded text-sm hover:bg-yellow-100 transition"
+          >
+            Edit
+          </Link>
+          <button
+            onClick={() => onDelete(item.itemId)}
+            className="px-3 py-1 border rounded text-sm text-red-600 hover:bg-red-100 transition"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
